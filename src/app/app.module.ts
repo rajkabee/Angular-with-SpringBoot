@@ -1,18 +1,41 @@
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+
+
+const routes: Routes = [
+                      {path: 'category/:id', component: ProductListComponent},
+                      {path: 'category', component: ProductListComponent},
+                    {path: 'products', component: ProductListComponent },
+                    {path: '', redirectTo: '/products', pathMatch: 'full'},
+                    {path: '**', redirectTo: '/products', pathMatch: 'full'}
+                    ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  exports: [RouterModule]
 })
-export class AppModule { }
+export class AppModule { 
+
+  
+}
